@@ -1,17 +1,12 @@
-<h1 align="center">NanoPi-R2S/R4S/T6-OpenWrt</h1>
+<h1 align="center">NanoPC T6-OpenWrt</h1>
 <p align="center">
 <img src="https://forthebadge.com/images/badges/built-with-love.svg">
 <p>
 <p align="center">
-<img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/msylgj/R2S-R4S-OpenWrt/total?style=for-the-badge">
-<img alt="GitHub" src="https://img.shields.io/github/license/msylgj/R2S-R4S-OpenWrt?style=for-the-badge">
-<p>
-<p align="center">
-<img src="https://github.com/msylgj/R2S-R4S-OpenWrt/actions/workflows/Immortalwrt-snapshot.yml/badge.svg">
-<img src="https://github.com/msylgj/R2S-R4S-OpenWrt/actions/workflows/Immortalwrt-release.yml/badge.svg">
+<img src="https://github.com/chenglong-do/T6-OpenWrt/actions/workflows/Immortalwrt-snapshot.yml/badge.svg">
 <p>
 
-<h1 align="center">请勿用于商业用途!!!</h1>
+<h3 align="center">请勿用于商业用途!!!</h1>
 
 ## 当前已知问题:
 - 无
@@ -28,7 +23,7 @@
 * 支持scp和sftp
 * 无usb-wifi支持
 * 原生OP内置升级可用,固件重置可用
-* OC-1.6(r2s)/2.2-1.8(r4s)/2.4-1.8(T6)
+* 2.4-1.8(T6)
 
 ## 插件清单
 - 仅供参考，不同设备和分支插件略有区别，具体查看SEED/config
