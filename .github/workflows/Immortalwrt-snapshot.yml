@@ -1,15 +1,51 @@
 name: Immortalwrt snapshot
 
+# on:
+#   push:
+#       branches:
+#         - master
+#       paths:
+#         - 'SWITCH'
+#   # schedule:
+#   #   - cron: '0 0 * * 0'
+#   watch:
+#     types: [started]
+
 on:
-  push:
-      branches:
-        - master
-      paths:
-        - 'SWITCH'
-  # schedule:
-  #   - cron: '0 0 * * 0'
-  watch:
-    types: [started]
+  workflow_dispatch:
+    inputs:
+      device:
+        description: 'Select the build device'
+        required: true
+        default: 'x86_64'
+        type: choice
+        options:
+          - 'armv8'
+          - 'nanopi-r4s'
+          - 'nanopc-t6'
+          - 'x86_64'
+      version:
+        description: 'Select the build version'
+        required: true
+        default: 'release'
+        type: choice
+        options:
+          - 'release'
+          - 'snapshot'
+      ccache:
+        description: 'Enable ccache (Use Cache to speed up next build)'
+        type: boolean
+        default: false
+      lan_addr:
+        description: 'Setting default LAN address'
+        required: true
+        default: '10.0.0.1'
+        type: string
+      build_options:
+        description: 'Build options (separate multiple options with spaces)'
+        required: false
+        default: ''
+        type: string
 
 jobs:
 
