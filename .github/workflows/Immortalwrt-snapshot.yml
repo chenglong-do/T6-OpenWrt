@@ -1,13 +1,13 @@
 name: Immortalwrt snapshot
 
 on:
-  # push:
-  #     branches:
-  #       - master
-  #     paths:
-  #       - 'SWITCH'
-  schedule:
-    - cron: '0 0 * * 0'
+  push:
+      branches:
+        - master
+      paths:
+        - 'SWITCH'
+  # schedule:
+  #   - cron: '0 0 * * 0'
   watch:
     types: [started]
 
