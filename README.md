@@ -37,10 +37,11 @@
 - app:cpufreq
 - app:daed
 - app:frps
-- app:mihomo
 - app:ramfree
-- app:wechatpush
-- app:tencentddns
+- app:lucky
+- app:ttyd
+- app:uhttpd
+- app:upnp
 - app:vlmcsd
 - app:wol
 - app:zerotier
@@ -54,6 +55,9 @@
 
 ## 特别感谢（排名不分先后）
 
-|          [CTCGFW](https://github.com/immortalwrt)           |           [coolsnowwolf](https://github.com/coolsnowwolf)            |              [QiuSimons](https://github.com/QiuSimons)               |              [Quintus](https://github.com/quintus-lab)               |              [mj22226](https://github.com/mj22226)               |
-| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| <img width="120" src="https://avatars.githubusercontent.com/u/53193414"/> | <img width="120" src="https://avatars.githubusercontent.com/u/31687149" /> | <img width="120" src="https://avatars.githubusercontent.com/u/45143996" /> | <img width="120" src="https://avatars.githubusercontent.com/u/31897806" /> | <img width="120" src="https://avatars.githubusercontent.com/u/67804477" /> |
+- [msylgj](https://github.com/msylgj/R2S-R4S-OpenWrt)
+- [CTCGFW](https://github.com/immortalwrt) 
+- [coolsnowwolf](https://github.com/coolsnowwolf)
+- [QiuSimons](https://github.com/QiuSimons) 
+- [Quintus](https://github.com/quintus-lab)
+- [mj22226](https://github.com/mj22226) 
