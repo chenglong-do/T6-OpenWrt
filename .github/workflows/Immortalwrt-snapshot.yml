@@ -1,19 +1,8 @@
 name: Immortalwrt snapshot
 
-# on:
-#   push:
-#       branches:
-#         - master
-#       paths:
-#         - 'SWITCH'
-#   # schedule:
-#   #   - cron: '0 0 * * 0'
-#   watch:
-#     types: [started]
-
 on:
-  schedule:
-    - cron: 0 16 * * *
+  # schedule:
+  #   - cron: 0 16 * * *
   workflow_dispatch:
 
 # on:
