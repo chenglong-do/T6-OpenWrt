@@ -9,8 +9,11 @@
 <h3 align="center">请勿用于商业用途!!!</h1>
 
 ## 当前已知问题:
+
 - 无
+  
 ## 说明
+
 * ImmortalWrt master branch-SNAPSHOT / ImmortalWrt Release
 * Linux-kernel: 6.6.x 
 * Fork自ImmortalWrt,个人根据**完全私人**口味进行了一定修改,建议去源库了解更多
@@ -26,6 +29,7 @@
 * 2.4-1.8(T6)
 
 ## 插件清单
+
 - 仅供参考，不同设备和分支插件略有区别，具体查看SEED/config
 - app:arpbind
 - app:autoreboot
@@ -44,10 +48,10 @@
 - theme:bootstrap
 
 ## 升级方法
+
 * 原生OP内置升级,可选保留配置
 * reset按钮可用(使用squashfs格式固件)
-* 刷写或升级后遇到任何问题，可以尝试ssh进路由器，输入fuck，回车后等待重启，或可解决(使用squashfs格式固件,需要修改prepare_package去掉最后的注释,来自QiuSimons)
-
+  
 ## 固件烧写（SD to eMMC）
 
 1. 下载最新 Releases 固件并通过 SD 卡启动
