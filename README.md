@@ -16,8 +16,8 @@
 
 * ImmortalWrt master branch-SNAPSHOT / ImmortalWrt Release
 * Linux-kernel: 6.6.x 
-* Fork自ImmortalWrt,个人根据**完全私人**口味进行了一定修改,建议去源库了解更多
-    - [immortalwrt](https://github.com/immortalwrt/immortalwrt)
+* Fork自 msylgj ,个人根据**完全私人**口味进行了一定修改,建议去源库了解更多
+    - [msylgj](https://github.com/msylgj/R2S-R4S-OpenWrt)
 * ipv4: 192.168.10.1
 * username: root
 * password: 空 / password
