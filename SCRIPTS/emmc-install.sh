@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Author: sbwml <admin@cooluc.com>
-# This script helps the automation Flashing the eMMC in a NanoPi R5S.
+# This script helps the automation Flashing the eMMC in a NanoPC T6.
 
 # check
 commands=("bash" "parted" "awk" "sed" "grep" "zcat" "dd" "fdisk")
