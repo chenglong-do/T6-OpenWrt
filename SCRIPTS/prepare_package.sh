@@ -32,20 +32,15 @@ git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt feeds/packa
 rm -rf package/lucky
 git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
 
-### 最后的收尾工作 ###
-# Lets Fuck
-if [ ! -d "package/base-files/files/usr/bin" ]; then
-    mkdir package/base-files/files/usr/bin
-fi
-cp -f ../SCRIPTS/fuck package/base-files/files/usr/bin/fuck
 # 定制化配置
 sed -i "s/'%D %V %C'/'Built by OPENWRT($(date +%Y.%m.%d))@%D %V'/g" package/base-files/files/etc/openwrt_release
 sed -i "/DISTRIB_REVISION/d" package/base-files/files/etc/openwrt_release
 sed -i "/%D/a\ Built by OPENWRT($(date +%Y.%m.%d))" package/base-files/files/etc/banner
-sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 sed -i 's/1608/1800/g' package/emortal/cpufreq/files/cpufreq.uci
 sed -i 's/2016/2208/g' package/emortal/cpufreq/files/cpufreq.uci
 sed -i 's/1512/1608/g' package/emortal/cpufreq/files/cpufreq.uci
+cp -f ../SCRIPTS/emmc-install.sh package/base-files/files/usr/bin/emmc-install.sh
 # 生成默认配置及缓存
 rm -rf .config
 
