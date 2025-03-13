@@ -12,10 +12,10 @@
 - 无
 ## 说明
 * ImmortalWrt master branch-SNAPSHOT / ImmortalWrt Release
-* Linux-kernel: 6.6.x / 5.15.x
+* Linux-kernel: 6.6.x 
 * Fork自ImmortalWrt,个人根据**完全私人**口味进行了一定修改,建议去源库了解更多
     - [immortalwrt](https://github.com/immortalwrt/immortalwrt)
-* ipv4: 192.168.2.1
+* ipv4: 192.168.10.1
 * username: root
 * password: 空 / password
 * 原汁原味非杂交! 感谢Immortalwrt/R2S Club/R4S Club/天灵/GC/QC等诸多大佬的努力!
@@ -47,6 +47,17 @@
 * 原生OP内置升级,可选保留配置
 * reset按钮可用(使用squashfs格式固件)
 * 刷写或升级后遇到任何问题，可以尝试ssh进路由器，输入fuck，回车后等待重启，或可解决(使用squashfs格式固件,需要修改prepare_package去掉最后的注释,来自QiuSimons)
+
+## 固件烧写（SD to eMMC）
+
+1. 下载最新 Releases 固件并通过 SD 卡启动
+2. 使用 Xftp 等工具上传一份固件到 /tmp 目录，或通过终端 wget 在线下载固件到 /tmp 目录
+3. 使用内建命令写入固件到 eMMC 存储（请根据实际文件名称与路径）
+4. 脚本来自 sbwml 大佬
+   
+```sh
+emmc-install /tmp/xxx-squashfs-sysupgrade.img.gz
+```
 
 ## 特别感谢（排名不分先后）
 
