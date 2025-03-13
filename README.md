@@ -51,6 +51,7 @@
 ## 特别感谢（排名不分先后）
 
 - [msylgj](https://github.com/msylgj/R2S-R4S-OpenWrt)
+- [sbwml](https://github.com/sbwml/r4s_build_script)
 - [immortalwrt](https://github.com/immortalwrt/immortalwrt)
 - [CTCGFW](https://github.com/immortalwrt) 
 - [coolsnowwolf](https://github.com/coolsnowwolf)
