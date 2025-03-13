@@ -148,9 +148,7 @@ jobs:
           gzip *.img
           sha256sum *.gz | tee T6-R4S-OPENWRT-snapshot-K6.6-$(date +%Y-%m-%d).sha256sum
           mv *t6*ext4* ./T6-OPENWRT-snapshot-K6.6-$(date +%Y-%m-%d)-ext4.img.gz
-          mv *r4s*ext4* ./R4S-OPENWRT-snapshot-K6.6-$(date +%Y-%m-%d)-ext4.img.gz
           mv *t6*squashfs* ./T6-OPENWRT-snapshot-K6.6-$(date +%Y-%m-%d)-sfs.img.gz
-          mv *r4s*squashfs* ./R4S-OPENWRT-snapshot-K6.6-$(date +%Y-%m-%d)-sfs.img.gz
           cd ../openwrt
           cp .config ../artifact/config-full.seed
           ./scripts/diffconfig.sh > ../artifact/config-diff.seed
