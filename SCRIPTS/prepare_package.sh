@@ -20,6 +20,9 @@ echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >>
 # MOD Argon
 rm -rf feeds/luci/themes/luci-theme-argon
 git clone -b randomPic --depth 1 https://github.com/msylgj/luci-theme-argon.git feeds/luci/themes/luci-theme-argon
+# WeChatPush
+rm -rf feeds/luci/applications/luci-app-wechatpush
+git clone -b master --depth 1 https://github.com/tty228/luci-app-wechatpush.git feeds/luci/applications/luci-app-wechatpush
 # geodata
 rm -rf feeds/packages/net/v2ray-geodata
 git clone -b master --depth 1 https://github.com/QiuSimons/openwrt-mos.git openwrt-mos
