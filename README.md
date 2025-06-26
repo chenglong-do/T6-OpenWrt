@@ -34,7 +34,7 @@
 - app:arpbind
 - app:autoreboot
 - app:cpufreq
-- app:daed
+- app:ddns-go
 - app:frps
 - app:ramfree
 - app:lucky
