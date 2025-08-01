@@ -2,8 +2,6 @@
 CONFIG_TARGET_rockchip=y
 CONFIG_TARGET_rockchip_armv8=y
 CONFIG_TARGET_MULTI_PROFILE=y
-# CONFIG_TARGET_DEVICE_rockchip_armv8_DEVICE_friendlyarm_nanopi-r4s-enterprise=y
-# CONFIG_TARGET_DEVICE_PACKAGES_rockchip_armv8_DEVICE_friendlyarm_nanopi-r4s-enterprise=""
 CONFIG_TARGET_DEVICE_rockchip_armv8_DEVICE_friendlyarm_nanopc-t6=y
 CONFIG_TARGET_DEVICE_PACKAGES_rockchip_armv8_DEVICE_friendlyarm_nanopc-t6="luci-app-frps luci-i18n-frps-zh-cn"
 CONFIG_TARGET_PER_DEVICE_ROOTFS=y
@@ -14,7 +12,6 @@ CONFIG_TARGET_ROOTFS_PARTSIZE=1024
 ### AGGRESSIVE ###
 CONFIG_BPF_TOOLCHAIN_BUILD_LLVM=y
 CONFIG_KERNEL_DEBUG_INFO_BTF=y
-# CONFIG_KERNEL_DEBUG_INFO_REDUCED is not set
 CONFIG_DEVEL=y
 CONFIG_TOOLCHAINOPTS=y
 #CONFIG_GCC_USE_VERSION_11=y
@@ -48,7 +45,6 @@ CONFIG_PACKAGE_kmod-drm-panfrost=y
 
 ### LUCI ###
 CONFIG_LUCI_LANG_zh_Hans=y
-CONFIG_PACKAGE_luci-app-3cat=y
 CONFIG_PACKAGE_luci-app-arpbind=y
 CONFIG_PACKAGE_luci-app-autoreboot=y
 CONFIG_PACKAGE_luci-app-cpufreq=y
@@ -69,6 +65,7 @@ CONFIG_PACKAGE_luci-app-openclash=y
 CONFIG_PACKAGE_luci-app-ttyd=y
 CONFIG_PACKAGE_luci-app-uhttpd=y
 CONFIG_PACKAGE_luci-app-upnp=y
+CONFIG_PACKAGE_luci-app-socat=y
 
 ### THEME ###
 CONFIG_PACKAGE_luci-theme-argon=y
