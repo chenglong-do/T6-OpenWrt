@@ -62,8 +62,8 @@ jobs:
       - name: Prepare Sources
         id: prepare
         run: |
-          sudo chown -R runner:runner /home/runner/work/R2S-R4S-OpenWrt
-          latest_release="$(curl -s https://github.com/immortalwrt/immortalwrt/tags | grep -Eo "v[0-9\.]+\-*r*c*[0-9]*.tar.gz" | sed -n '/[2-9][0-9]/p' | sed -n 1p | sed 's/.tar.gz//g')"
+          sudo chown -R runner:runner /home/runner/work/T6-OpenWrt
+          latest_release="openwrt-24.10"
           git clone -b ${latest_release} --depth 1 https://github.com/immortalwrt/immortalwrt.git openwrt
           echo "latest_release=${latest_release}" >>$GITHUB_ENV
       - name: Prepare Package
@@ -109,14 +109,12 @@ jobs:
           gzip *.img
           releaseTag=${{ env.latest_release }}
           sha256sum *.gz | tee R2S-R4S-OPoA-$releaseTag-$(date +%Y-%m-%d).sha256sum
-          mv *r2s*ext4* ./R2S-OPoA-$releaseTag-$(date +%Y-%m-%d)-ext4.img.gz
-          mv *r4s*ext4* ./R4S-OPoA-$releaseTag-$(date +%Y-%m-%d)-ext4.img.gz
-          mv *r2s*squashfs* ./R2S-OPoA-$releaseTag-$(date +%Y-%m-%d)-sfs.img.gz
-          mv *r4s*squashfs* ./R4S-OPoA-$releaseTag-$(date +%Y-%m-%d)-sfs.img.gz
+          mv *t6*ext4* ./T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d)-ext4.img.gz
+          mv *t6*squashfs* ./T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d)-sfs.img.gz
           cd ../openwrt
           cp .config ../artifact/config-full.seed
           ./scripts/diffconfig.sh > ../artifact/config-diff.seed
-          release_tag="R2S-R4S-OPoA-$releaseTag-$(date +%Y-%m-%d)"
+          release_tag="T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d)"
           echo "release_tag=${release_tag}" >>$GITHUB_ENV
       - name: Upload Artifact
         uses: actions/upload-artifact@main
