@@ -3,7 +3,7 @@
 <img src="https://forthebadge.com/images/badges/built-with-love.svg">
 <p>
 <p align="center">
-<img src="https://github.com/chenglong-do/T6-OpenWrt/actions/workflows/Immortalwrt-snapshot.yml/badge.svg">
+<img src="https://github.com/chenglong-do/T6-OpenWrt/actions/workflows/Immortalwrt-release.yml/badge.svg">
 <p>
 
 <h3 align="center">请勿用于商业用途!!!</h1>
