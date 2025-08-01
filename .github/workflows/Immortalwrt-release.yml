@@ -102,7 +102,7 @@ jobs:
           gzip -d *.gz && exit 0
           gzip *.img
           releaseTag=${{ env.latest_release }}
-          sha256sum *.gz | tee R2S-R4S-OPoA-$releaseTag-$(date +%Y-%m-%d).sha256sum
+          sha256sum *.gz | tee T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d).sha256sum
           mv *t6*ext4* ./T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d)-ext4.img.gz
           mv *t6*squashfs* ./T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d)-sfs.img.gz
           cd ../openwrt
