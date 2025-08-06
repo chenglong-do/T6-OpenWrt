@@ -91,7 +91,7 @@ jobs:
 
       - name: 加载自定义 feeds
         env:
-          FEEDS_CONF_PATH: ${{ matrix.ARCHITECTURE }}/${{ env.FEEDS_CONF }}
+          FEEDS_CONF_PATH: ${{ env.FEEDS_CONF }}
         run: |
           [ -e $FEEDS_CONF_PATH ] && mv $FEEDS_CONF_PATH openwrt/feeds.conf
           chmod +x $DIY_P1_SH
@@ -107,7 +107,7 @@ jobs:
 
       - name: 加载自定义配置
         env:
-          CONFIG_FILE_PATH: ${{ matrix.ARCHITECTURE }}/${{ env.CONFIG_FILE }}
+          CONFIG_FILE_PATH: ${{ env.CONFIG_FILE }}
         run: |
           [ -e files ] && mv files openwrt/files
           [ -e $CONFIG_FILE_PATH ] && mv $CONFIG_FILE_PATH openwrt/.config
@@ -205,4 +205,5 @@ jobs:
         with:
           keep_latest: 15
           delete_tags: true
-          token: ${{ env.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
