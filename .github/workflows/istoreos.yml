@@ -96,6 +96,7 @@ jobs:
           [ -e $FEEDS_CONF_PATH ] && mv $FEEDS_CONF_PATH openwrt/feeds.conf
           chmod +x $DIY_P1_SH
           cd openwrt
+          cat feeds.conf
           $GITHUB_WORKSPACE/$DIY_P1_SH
 
       - name: 更新 feeds
@@ -110,6 +111,7 @@ jobs:
         run: |
           [ -e files ] && mv files openwrt/files
           [ -e $CONFIG_FILE_PATH ] && mv $CONFIG_FILE_PATH openwrt/.config
+          cat .config
           chmod +x $DIY_P2_SH
           cd openwrt
           $GITHUB_WORKSPACE/$DIY_P2_SH
@@ -174,13 +176,12 @@ jobs:
           
           ⏱️ 编译时间: $(date +"%Y年%m月%d日%H时%M分")
           
-          🌐 管理地址: 192.168.100.1
+          🌐 管理地址: 192.168.2.1
           
           👤 用户名: root
           
-          🔒 密码: password
+          🔒 密码: password 或者空
           
-          📒 说明: 单网口设备默认网口为LAN，旁路由模式，需要接入主路由器后进后台查找对应IP地址访问，反之双网口设备默认网口为WAN+LAN，主路由模式。 " >> release.txt
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: 自动发布固件到 Releases
@@ -192,7 +193,7 @@ jobs:
           files: ${{ env.FIRMWARE }}/*
 
       - name: 删除运行记录
-        uses: xiaomeng9597/delete-workflow-runs@main
+        uses: chenglong-do/delete-workflow-runs@main
         with:
           retain_days: 1
           keep_minimum_runs: 1
@@ -204,3 +205,4 @@ jobs:
         with:
           keep_latest: 15
           delete_tags: true
+          token: ${{ env.GITHUB_TOKEN }}
