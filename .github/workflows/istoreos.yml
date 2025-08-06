@@ -27,7 +27,7 @@ jobs:
         REPO_BRANCH:
           - istoreos-24.10
         ARCHITECTURE:
-          - rk35xx
+          - rk3588
         os:
           - ubuntu-22.04
 
