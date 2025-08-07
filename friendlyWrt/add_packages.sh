@@ -59,6 +59,9 @@ add_or_update_config() {
     [ -d luci-app-lucky ] && rm -rf luci-app-lucky
     git clone https://github.com/gdy666/luci-app-lucky.git --depth 1
 })
+add_or_update_config "CONFIG_PACKAGE_luci-compat=y"
+add_or_update_config "CONFIG_PACKAGE_luci-lua-runtime=y"
+add_or_update_config "CONFIG_PACKAGE_luci-base=y"
 add_or_update_config "CONFIG_PACKAGE_luci-app-lucky=y"
 # }}
 
@@ -67,6 +70,11 @@ add_or_update_config "CONFIG_PACKAGE_luci-app-lucky=y"
     [ -d OpenClash ] && rm -rf OpenClash
     git clone https://github.com/vernesong/OpenClash.git --depth 1
 })
+add_or_update_config "CONFIG_PACKAGE_bash=y"
+add_or_update_config "CONFIG_PACKAGE_curl=y"
+add_or_update_config "CONFIG_PACKAGE_ruby=y"
+add_or_update_config "CONFIG_PACKAGE_ruby-yaml=y"
+add_or_update_config "CONFIG_PACKAGE_unzip=y"
 add_or_update_config "CONFIG_PACKAGE_luci-app-openclash=y"
 # }}
 
