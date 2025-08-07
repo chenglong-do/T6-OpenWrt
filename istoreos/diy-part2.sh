@@ -12,4 +12,4 @@ git clone --depth=1 https://github.com/gdy666/luci-app-lucky.git package/lucky
 
 # OpenClash
 rm -rf package/OpenClash
-git clone --depth=1 https://github.com/vernesong/OpenClash package/OpenClash
+git clone --depth=1 https://github.com/vernesong/OpenClash.git package/OpenClash
