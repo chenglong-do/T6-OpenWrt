@@ -1,7 +1,11 @@
 name: Friendly Wrt
+
 on:
+  repository_dispatch:
+  workflow_dispatch:
   watch:
     types: started
+
 jobs:
   prepare_release:
     runs-on: ubuntu-22.04
