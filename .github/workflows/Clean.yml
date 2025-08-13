@@ -1,8 +1,8 @@
 name: delete-older-releases
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: 0 16 * * *
+  schedule:
+    - cron: 0 16 * * *
     
 jobs:
   del_runs:
@@ -14,6 +14,7 @@ jobs:
       with:
         delete_releases: true
         releases_keep_latest: 5
+        delete_tags: true
         delete_workflows: true
         workflows_keep_day: 10
         gh_token: ${{ secrets.GITHUB_TOKEN }}
