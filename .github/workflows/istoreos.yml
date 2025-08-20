@@ -3,8 +3,8 @@ name: Build iStore OS
 on:
   repository_dispatch:
   workflow_dispatch:
-  schedule:
-    - cron: 0 16 * * *
+  watch:
+    types: started
 
 env:
   REPO_URL: https://github.com/istoreos/istoreos
