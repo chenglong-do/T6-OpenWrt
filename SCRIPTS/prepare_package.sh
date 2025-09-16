@@ -9,13 +9,13 @@ sed -i 's/Os/O2/g' include/target.mk
 ./scripts/feeds install -a
 
 ### 必要的 Patches ###
-# 替换原有的 luci-app-dae 和 dae 使用dae-next from CA
-git clone -b next --depth 1 https://github.com/QiuSimons/luci-app-dae.git dae-next
-rm -rf feeds/luci/applications/luci-app-dae
-rm -rf feeds/packages/net/dae
-cp -rf dae-next/luci-app-dae feeds/luci/applications/luci-app-daed
-cp -rf dae-next/dae feeds/packages/net/dae
-rm -rf dae-next
+# 替换原有的 luci-app-daed 和 daed 使用kixdaed
+git clone -b master --depth 1 https://github.com/QiuSimons/luci-app-daed.git kixdaed
+rm -rf feeds/luci/applications/luci-app-daed
+rm -rf feeds/packages/net/daed
+cp -rf kixdaed/luci-app-daed feeds/luci/applications/luci-app-daed
+cp -rf kixdaed/daed feeds/packages/net/daed
+rm -rf kixdaed
 
 ### 获取额外的 LuCI 应用、主题 ###
 # Nikki with SmartGroup
