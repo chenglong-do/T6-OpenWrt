@@ -13,28 +13,52 @@ jobs:
     if: github.repository_owner_id == github.event.sender.id || github.event_name == 'schedule'
 
     steps:
-      - name: Show system
+      - name: Before freeing up disk space
         run: |
-          echo -e "Total CPU cores\t: $(nproc)"
-          cat /proc/cpuinfo | grep 'model name'
-          cpu_name=$(cat /proc/cpuinfo | grep "model name" | head -n 1 | awk -F: '{print $2}' | sed 's/^[ \t]*//')
-          if [[ "$cpu_name" =~ "8370C" || "$cpu_name" =~ "7763" ]]; then
-            echo "CPU为8370C或7763，继续执行命令"
-            ulimit -a
-          else
-            echo "CPU不为8370C或7763，性能不足，停止执行命令"
-            exit 1
-          fi
-      - name: Maximize build space
-        uses: easimon/maximize-build-space@master
+          echo "Before freeing up disk space"
+          echo "=============================================================================="
+          df -hT
+          echo "=============================================================================="
+  
+      - name: "Optimize Disk Space"
+        uses: "hugoalh/disk-space-optimizer-ghaction@v0.8.1"
         with:
-          swap-size-mb: 512
-          temp-reserve-mb: 128
+          operate_sudo: "True"
+          general_include: ".+"
+          general_exclude: |-
+            ^GCC$
+            ^G\+\+$
+            Clang
+            LLVM
+          docker_include: ".+"
+          docker_prune: "True"
+          docker_clean: "True"
+          apt_prune: "True"
+          apt_clean: "True"
+          homebrew_prune: "True"
+          homebrew_clean: "True"
+          npm_prune: "True"
+          npm_clean: "True"
+          os_swap: "True"
+  
+      - name: Freeing up disk space
+        uses: easimon/maximize-build-space@master
+        with: 
           root-reserve-mb: 3072
+          swap-size-mb: 1
           remove-dotnet: 'true'
           remove-android: 'true'
           remove-haskell: 'true'
           remove-codeql: 'true'
+          remove-docker-images: 'true'
+  
+      - name: Free up disk space complete
+        run: |
+          echo "Free up disk space complete"
+          echo "=============================================================================="
+          df -hT
+          echo "=============================================================================="
+          
       - name: Init build dependencies
         env:
           DEBIAN_FRONTEND: noninteractive
@@ -51,8 +75,10 @@ jobs:
           sudo -E apt-get -qq clean
           sudo -E git config --global user.name 'GitHub Actions' && git config --global user.email 'noreply@github.com'
           df -h
+      
       - name: Checkout
         uses: actions/checkout@main
+      
       - name: Prepare Sources
         id: prepare
         run: |
@@ -60,22 +86,38 @@ jobs:
           latest_release="openwrt-24.10"
           git clone -b ${latest_release} --depth 1 https://github.com/immortalwrt/immortalwrt.git openwrt
           echo "latest_release=${latest_release}" >>$GITHUB_ENV
+          cd openwrt
+          echo "OPENWRT_PATH=$PWD" >> $GITHUB_ENV
+          cd ..
+      
+      - name: Cache Toolchain
+        if: env.CACHE_TOOLCHAIN == 'true'
+        uses: HiGarfield/cachewrtbuild@main
+        with:
+          ccache: false
+          mixkey: immortalwrt-2410-rk3588-t6
+          prefix: ${{ env.OPENWRT_PATH }}
+
+      
       - name: Prepare Package
         run: |
           cd openwrt
           cp -f ../SCRIPTS/prepare_package.sh ./prepare_package.sh
           /bin/bash prepare_package.sh
+      
       - name: Make Config
         run: |
           cd openwrt
           mv ../SEED/config-release.seed .config
           sed -i '/CONFIG_TARGET_ROOTFS_SQUASHFS/d' .config
           make defconfig
+      
       - name: Make Download
         run: |
           df -h
           cd openwrt
           make download -j50
+      
       - name: Compile Openwrt
         id: compileopenwrt
         continue-on-error: true
@@ -84,14 +126,17 @@ jobs:
           cd openwrt
           make -j$(($(nproc) + 1)) || make -j$(($(nproc) + 1)) V=s
           echo $?
+      
       - name: If Error
         if: steps.compileopenwrt.outcome == 'failure'
         run: |
           cat openwrt/.config
           echo '================================================================'
           cd openwrt && make -j1 V=s
+      
       - name: Print Disk Space After
         run: df -h
+      
       - name: Assemble Artifact
         id: assemble_artifact
         run: |
@@ -110,11 +155,13 @@ jobs:
           ./scripts/diffconfig.sh > ../artifact/config-diff.seed
           release_tag="T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d)"
           echo "release_tag=${release_tag}" >>$GITHUB_ENV
+      
       - name: Upload Artifact
         uses: actions/upload-artifact@main
         with:
           name: ${{ env.release_tag }}-artifact
           path: ./artifact/
+      
       - name: Create release
         id: create_release
         uses: ncipollo/release-action@main
