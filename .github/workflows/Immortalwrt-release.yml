@@ -83,7 +83,7 @@ jobs:
         id: prepare
         run: |
           sudo chown -R runner:runner /home/runner/work/T6-OpenWrt
-          latest_release="openwrt-24.10"
+          latest_release="openwrt-25.12"
           git clone -b ${latest_release} --depth 1 https://github.com/immortalwrt/immortalwrt.git openwrt
           echo "latest_release=${latest_release}" >>$GITHUB_ENV
           cd openwrt
@@ -95,20 +95,20 @@ jobs:
         uses: HiGarfield/cachewrtbuild@main
         with:
           ccache: false
-          mixkey: immortalwrt-2410-rk3588-t6
+          mixkey: immortalwrt-2512-rk3588-t6
           prefix: ${{ env.OPENWRT_PATH }}
 
       
       - name: Prepare Package
         run: |
           cd openwrt
-          cp -f ../SCRIPTS/prepare_package.sh ./prepare_package.sh
+          cp -f ../scripts/prepare_package.sh ./prepare_package.sh
           /bin/bash prepare_package.sh
       
       - name: Make Config
         run: |
           cd openwrt
-          mv ../SEED/config-release.seed .config
+          mv ../config/config-immortalwrt-release.config .config
           sed -i '/CONFIG_TARGET_ROOTFS_SQUASHFS/d' .config
           make defconfig
       
@@ -116,7 +116,7 @@ jobs:
         run: |
           df -h
           cd openwrt
-          make download -j50
+          make download -j$(nproc)
       
       - name: Compile Openwrt
         id: compileopenwrt
