@@ -3,18 +3,16 @@ clear
 
 ### 基础部分 ###
 
+# Nikki
+# add feed
+echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> "feeds.conf.default"
+
+
 # 更新 Feeds
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
 ### 获取额外的 LuCI 应用、主题 ###
-# Nikki
-git clone -b main --depth 1 https://github.com/nikkinikki-org/OpenWrt-nikki.git nikki
-cp -rf nikki/luci-app-nikki feeds/luci/applications/luci-app-nikki
-cp -rf nikki/nikki feeds/packages/net/nikki
-ln -sf ../../../feeds/luci/applications/luci-app-nikki ./package/feeds/luci/luci-app-nikki
-ln -sf ../../../feeds/packages/net/nikki ./package/feeds/packages/nikki
-rm -rf nikki
 
 # Lucky
 rm -rf package/lucky
