@@ -174,30 +174,31 @@ jobs:
           cd ./artifact/
           releaseTag=${{ env.latest_release }}
           buildDate=$(date +%Y-%m-%d)
-          for f in *.gz; do
-            [ -e "$f" ] || continue
-            gzip -df "$f"
-          done
-          for f in *.img; do
-            [ -e "$f" ] || continue
-            gzip -f "$f"
-          done
+          echo "=== Original image files in artifact/ ==="
+          ls -lh *.img* 2>/dev/null || echo "No .img files found"
+          echo "=== Renaming images for T6 and R6C ==="
           for f in *t6*ext4*.img.gz; do
             [ -e "$f" ] || continue
+            echo "Renaming T6 ext4: $f"
             mv "$f" "./T6-OPENWRT-$releaseTag-$buildDate-ext4.img.gz"
           done
           for f in *t6*squashfs*.img.gz; do
             [ -e "$f" ] || continue
+            echo "Renaming T6 squashfs: $f"
             mv "$f" "./T6-OPENWRT-$releaseTag-$buildDate-sfs.img.gz"
           done
           for f in *r6c*ext4*.img.gz; do
             [ -e "$f" ] || continue
+            echo "Renaming R6C ext4: $f"
             mv "$f" "./R6C-OPENWRT-$releaseTag-$buildDate-ext4.img.gz"
           done
           for f in *r6c*squashfs*.img.gz; do
             [ -e "$f" ] || continue
+            echo "Renaming R6C squashfs: $f"
             mv "$f" "./R6C-OPENWRT-$releaseTag-$buildDate-sfs.img.gz"
           done
+          echo "=== Final renamed files ==="
+          ls -lh *.img.gz 2>/dev/null || echo "No .img.gz files found"
           sha256sum *.gz | tee OPENWRT-$releaseTag-$buildDate.sha256sum
           cd ../openwrt
           cp .config ../artifact/config-full.seed
