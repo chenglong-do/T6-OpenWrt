@@ -112,7 +112,14 @@ jobs:
           mv ../config/config-immortalwrt-release.config .config
           sed -i '/CONFIG_TARGET_ROOTFS_SQUASHFS/d' .config
           make defconfig
-      
+          ./scripts/config --disable PACKAGE_naiveproxy --disable PACKAGE_gn
+          make defconfig
+          grep -E 'PACKAGE_(naiveproxy|gn)' .config || true
+          if grep -Eq '^CONFIG_PACKAGE_(naiveproxy|gn)=y' .config; then
+            echo 'ERROR: naiveproxy or gn was re-enabled during defconfig'
+            exit 1
+          fi
+
       - name: Make Download
         run: |
           df -h
