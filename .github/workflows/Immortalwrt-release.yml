@@ -164,18 +164,45 @@ jobs:
         run: |
           rm -rf ./artifact/
           mkdir -p ./artifact/
-          mv openwrt/bin/targets/rockchip/armv8/*sysupgrade.img* ./artifact/
+          shopt -s nullglob
+          images=(openwrt/bin/targets/rockchip/armv8/*sysupgrade.img*)
+          if [ ${#images[@]} -eq 0 ]; then
+            echo "No sysupgrade images found"
+            exit 1
+          fi
+          cp "${images[@]}" ./artifact/
           cd ./artifact/
-          gzip -d *.gz && exit 0
-          gzip *.img
           releaseTag=${{ env.latest_release }}
-          sha256sum *.gz | tee T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d).sha256sum
-          mv *t6*ext4* ./T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d)-ext4.img.gz
-          mv *t6*squashfs* ./T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d)-sfs.img.gz
+          buildDate=$(date +%Y-%m-%d)
+          for f in *.gz; do
+            [ -e "$f" ] || continue
+            gzip -df "$f"
+          done
+          for f in *.img; do
+            [ -e "$f" ] || continue
+            gzip -f "$f"
+          done
+          for f in *t6*ext4*.img.gz; do
+            [ -e "$f" ] || continue
+            mv "$f" "./T6-OPENWRT-$releaseTag-$buildDate-ext4.img.gz"
+          done
+          for f in *t6*squashfs*.img.gz; do
+            [ -e "$f" ] || continue
+            mv "$f" "./T6-OPENWRT-$releaseTag-$buildDate-sfs.img.gz"
+          done
+          for f in *r6c*ext4*.img.gz; do
+            [ -e "$f" ] || continue
+            mv "$f" "./R6C-OPENWRT-$releaseTag-$buildDate-ext4.img.gz"
+          done
+          for f in *r6c*squashfs*.img.gz; do
+            [ -e "$f" ] || continue
+            mv "$f" "./R6C-OPENWRT-$releaseTag-$buildDate-sfs.img.gz"
+          done
+          sha256sum *.gz | tee OPENWRT-$releaseTag-$buildDate.sha256sum
           cd ../openwrt
           cp .config ../artifact/config-full.seed
           ./scripts/diffconfig.sh > ../artifact/config-diff.seed
-          release_tag="T6-OPENWRT-$releaseTag-$(date +%Y-%m-%d)"
+          release_tag="T6-R6C-OPENWRT-$releaseTag-$buildDate"
           echo "release_tag=${release_tag}" >>$GITHUB_ENV
       
       - name: Upload Artifact
